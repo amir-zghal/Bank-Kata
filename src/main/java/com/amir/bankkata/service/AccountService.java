@@ -15,4 +15,13 @@ public interface AccountService {
      * @throws AccountException
      */
     Operation deposit(Long accountId, double amount) throws AccountException;
+
+    /**
+     *
+     * @param accountId l'id du compte
+     * @param amount le montant à retirer
+     * @return l'opération créer
+     * @throws AccountException
+     */
+    Operation withdrawal(Long accountId, double amount) throws AccountException;
 }

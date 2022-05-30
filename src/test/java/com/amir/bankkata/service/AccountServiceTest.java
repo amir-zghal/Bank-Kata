@@ -31,4 +31,29 @@ class AccountServiceTest {
         });
         assertEquals("AccountId must be not null", ex.getMessage());
     }
+
+    @Test
+    void test_withdrawal_should_be_return_operation() throws AccountException {
+        Operation operation = accountService.withdrawal(2L, 2000);
+
+        assertNotNull(operation);
+        assertEquals(operation.getAmount(), new Amount(2000));
+        assertEquals(operation.getAccount().getBalance(), new Amount(8000));
+    }
+
+    @Test
+    void test_withdrawal_when_accountId_not_exist_should_be_return_exception() {
+        AccountException ex = assertThrows(AccountException.class, () -> {
+            accountService.withdrawal(4L, 5000);
+        });
+        assertEquals("Technical error : this acccount not exist : 4", ex.getMessage());
+    }
+
+    @Test
+    void test_withdrawal_when_whithdrawal_amount_bigger_then_balance_should_be_return_exception() {
+        AccountException ex = assertThrows(AccountException.class, () -> {
+            accountService.withdrawal(2L, 15000);
+        });
+        assertEquals("Functional error : you cannot withdraw this amount : 15000.0", ex.getMessage());
+    }
 }

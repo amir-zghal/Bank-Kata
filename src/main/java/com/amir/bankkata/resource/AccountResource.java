@@ -21,4 +21,10 @@ public class AccountResource {
         // TODO ajouter PreAuthorize pour controler l'accèes à ce service: controle de l'user connecté avec le customerId du compte
         return new ResponseEntity<Operation>(accountService.deposit(operationAction.getAccountId(), operationAction.getAmount()), HttpStatus.OK);
     }
+
+    @PostMapping("/withdrawal")
+    public ResponseEntity<Operation> withdrawal(@RequestBody OperationActionDto operationAction) throws AccountException {
+        // TODO ajouter PreAuthorize pour controler l'accèes à ce service: controle de l'user connecté avec le customerId du compte
+        return new ResponseEntity<Operation>(accountService.withdrawal(operationAction.getAccountId(), operationAction.getAmount()), HttpStatus.OK);
+    }
 }
