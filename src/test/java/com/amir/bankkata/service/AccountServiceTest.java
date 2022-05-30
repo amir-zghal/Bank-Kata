@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -55,5 +57,13 @@ class AccountServiceTest {
             accountService.withdrawal(2L, 15000);
         });
         assertEquals("Functional error : you cannot withdraw this amount : 15000.0", ex.getMessage());
+    }
+
+    @Test
+    void test_operationsHistory_should_be_return_list_operations() throws AccountException {
+        List<Operation> operations = accountService.operationsHistory(3L);
+
+        assertNotNull(operations);
+        assertEquals(operations.size(), 3);
     }
 }

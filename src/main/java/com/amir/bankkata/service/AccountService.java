@@ -3,6 +3,8 @@ package com.amir.bankkata.service;
 import com.amir.bankkata.exception.AccountException;
 import com.amir.bankkata.model.Operation;
 
+import java.util.List;
+
 /**
  * Couche métier de gestion de compte
  */
@@ -24,4 +26,12 @@ public interface AccountService {
      * @throws AccountException
      */
     Operation withdrawal(Long accountId, double amount) throws AccountException;
+
+    /**
+     *
+     * @param accountId l'id du compte
+     * @return la list des opérations
+     * @throws AccountException
+     */
+    List<Operation> operationsHistory(Long accountId) throws AccountException;
 }

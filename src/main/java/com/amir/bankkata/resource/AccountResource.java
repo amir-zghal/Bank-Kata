@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/accounts")
 public class AccountResource {
@@ -26,5 +28,11 @@ public class AccountResource {
     public ResponseEntity<Operation> withdrawal(@RequestBody OperationActionDto operationAction) throws AccountException {
         // TODO ajouter PreAuthorize pour controler l'accèes à ce service: controle de l'user connecté avec le customerId du compte
         return new ResponseEntity<Operation>(accountService.withdrawal(operationAction.getAccountId(), operationAction.getAmount()), HttpStatus.OK);
+    }
+
+    @GetMapping("/history/{id}")
+    public ResponseEntity<List<Operation>> history(@PathVariable Long id) throws AccountException {
+        // TODO ajouter PreAuthorize pour controler l'accèes à ce service: controle de l'user connecté avec le customerId du compte
+        return new ResponseEntity<List<Operation>>(accountService.operationsHistory(id), HttpStatus.OK);
     }
 }
